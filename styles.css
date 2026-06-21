@@ -133,16 +133,23 @@
 
   /* ---- Akt IV ---- */
   #akt4{background:linear-gradient(180deg,var(--navy) 0%,#0b0508 55%,var(--navy) 100%)}
-  .conseq{margin-top:2.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;width:100%;max-width:1000px}
-  .conseq .c{padding:1.6rem 1.4rem}
-  .conseq .c .ic{font-size:1.6rem;margin-bottom:.7rem;display:block}
-  .conseq .c .ct{font-weight:700;font-size:1.05rem;margin-bottom:.4rem}
-  .conseq .c .cd{font-size:.84rem;color:var(--muted);font-weight:300;line-height:1.5}
-  .closing{margin-top:3.2rem;max-width:30ch}
-  .closing .big{font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.15;letter-spacing:-.02em}
-  .closing .big em{color:var(--rot);font-style:normal}
-  .closing p{margin-top:1.2rem;font-weight:300;color:#c2d2e2;font-size:1.05rem;line-height:1.6;max-width:46ch}
-  @media(max-width:600px){.lp-track:before{top:30px}}
+  .conseq-list{margin-top:3rem;position:relative;width:100%;max-width:760px}
+.conseq-list:before{content:"";position:absolute;left:34px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--rot),var(--orange),var(--blau),#5FC9A8);opacity:.35}
+.conseq-item{display:flex;gap:1.8rem;align-items:flex-start;padding:1.9rem 0;position:relative;transition:transform .3s}
+.conseq-item:not(:last-child){border-bottom:1px solid var(--line)}
+.conseq-item:hover{transform:translateX(6px)}
+.conseq-marker{flex:0 0 68px;width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb, var(--accent) 16%, transparent);border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);color:var(--accent);position:relative;z-index:1;transition:box-shadow .3s,transform .3s}
+.conseq-marker svg{width:30px;height:30px}
+.conseq-item:hover .conseq-marker{box-shadow:0 0 28px color-mix(in srgb, var(--accent) 55%, transparent);transform:scale(1.06)}
+.conseq-body{padding-top:.3rem}
+.conseq-num{font-weight:800;font-size:.78rem;letter-spacing:.18em;color:var(--accent);margin-bottom:.5rem}
+.conseq-title{font-weight:800;font-size:1.5rem;letter-spacing:-.01em;margin-bottom:.6rem;color:#fff}
+.conseq-text{font-size:.98rem;color:#c2d2e2;font-weight:300;line-height:1.6;max-width:48ch}
+.conseq-item:nth-child(1){transition-delay:0s}
+.conseq-item:nth-child(2){transition-delay:.12s}
+.conseq-item:nth-child(3){transition-delay:.24s}
+.conseq-item:nth-child(4){transition-delay:.36s}
+@media(max-width:600px){.conseq-marker{flex:0 0 52px;width:52px;height:52px}.conseq-marker svg{width:24px;height:24px}.conseq-list:before{left:26px}.conseq-item{gap:1.2rem}.conseq-title{font-size:1.25rem}}
 
 
 /* ---- Datenlade-Fehler / GitHub-Pfade ---- */
