@@ -37,7 +37,7 @@
   #presult .big{font-weight:800;font-size:clamp(3rem,12vw,8rem);line-height:.95;color:var(--rot);letter-spacing:-.03em;text-shadow:0 0 60px rgba(245,0,46,.25)}
   #presult .big .unit{font-size:.3em;font-weight:600;color:var(--ink);vertical-align:.5em}
   #presult .sentence{font-weight:300;font-size:clamp(1rem,2.2vw,1.4rem);max-width:34ch;line-height:1.5;margin:.6rem auto 0}
-  #presult .sentence b{font-weight:600;color:var(--blau)}
+  #presult .sentence b{font-weight:700;color:#8ec5f5}
   .input-results #presult{margin-top:0;flex:1 1 300px;min-width:240px;max-width:430px;text-align:left;background:rgba(73,135,193,.18);border:1px solid rgba(73,135,193,.38);padding:1.3rem 1.4rem}
   .input-results #presult .sentence{margin:.6rem 0 0;text-align:left;max-width:38ch}
   .scrollcue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:#ffffff;font-weight:300;animation:bob 2s ease-in-out infinite;text-decoration:none}
