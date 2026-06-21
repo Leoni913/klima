@@ -14,8 +14,8 @@
   nav a.active .dot{background:var(--rot);transform:scale(1.4)}
   #prolog{align-items:center;text-align:center;overflow:hidden;justify-content:flex-start;padding:0;background:linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 50%, var(--navy) 100%)}
   .prolog-intro{width:100%;display:flex;flex-direction:column;align-items:center;padding:14vh 7vw 7vh}
-  .intro-title{font-weight:600;font-size:clamp(2.3rem,6.5vw,4.8rem);text-transform:uppercase;letter-spacing:.22em;line-height:1.25;max-width:30ch;color:#ffffff}
-  .intro-text{font-weight:300;font-size:clamp(1.02rem,1.9vw,1.32rem);line-height:1.6;max-width:56ch;color:#c2d2e2;margin-top:1.6rem}
+  .intro-title{font-weight:600;font-size:clamp(1.7rem,4.2vw,2.8rem);text-transform:uppercase;letter-spacing:.22em;line-height:1.25;max-width:30ch;color:#ffffff}
+  .intro-text{font-weight:300;font-size:clamp(1.02rem,1.9vw,1.32rem);line-height:1.6;max-width:56ch;color:#ffffff;margin-top:1.6rem}  
   .prolog-stage{position:relative;width:100%;align-self:stretch;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:9vh 7vw 7vh}
   .prolog-lifepath{width:100%;display:flex;justify-content:center;padding:3vh 7vw 1vh}
   #prolog .scrollcue{position:static;left:auto;bottom:auto;transform:none;margin:1.5rem 0 3rem;animation:bobflow 2s ease-in-out infinite}
@@ -40,7 +40,7 @@
   #presult .sentence b{font-weight:600;color:var(--blau)}
   .input-results #presult{margin-top:0;flex:1 1 300px;min-width:240px;max-width:430px;text-align:left;background:rgba(73,135,193,.18);border:1px solid rgba(73,135,193,.38);border-radius:8px;padding:1.3rem 1.4rem}
   .input-results #presult .sentence{margin:.6rem 0 0;text-align:left;max-width:38ch}
-  .scrollcue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:300;animation:bob 2s ease-in-out infinite;text-decoration:none}
+  .scrollcue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:#ffffff;font-weight:300;animation:bob 2s ease-in-out infinite;text-decoration:none}
   @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
   .chart-wrap{margin-top:3rem;width:100%;max-width:1100px}
   svg{width:100%;height:auto;display:block}
@@ -96,18 +96,17 @@
   .pstat .l{margin-top:.6rem;font-size:.74rem;color:#ffffff;font-weight:300;line-height:1.4}
 
   /* ---- Persönlicher Klima-Lebensweg ---- */
-  #lifepath{margin-top:2.4rem;opacity:0;transform:translateY(14px);transition:opacity .8s .3s,transform .8s .3s;width:100%;max-width:780px}
+  #lifepath{margin-top:2.4rem;opacity:0;transform:translateY(14px);transition:opacity .8s .3s,transform .8s .3s;width:100%;max-width:1000px}
   #lifepath.on{opacity:1;transform:none}
-  .lp-title{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);margin-bottom:1.4rem}
-  .lp-track{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;position:relative}
-  .lp-track:before{content:"";position:absolute;left:6%;right:6%;top:38px;height:2px;background:linear-gradient(90deg,var(--blau),var(--orange),var(--rot));opacity:.5}
+  .lp-title{font-size:1rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);margin-bottom:1.6rem}
+  .lp-track{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;position:relative}
+  .lp-track:before{content:"";position:absolute;left:6%;right:6%;top:46px;height:2px;background:linear-gradient(90deg,var(--blau),var(--orange),var(--rot));opacity:.5}
   .lp-node{position:relative;text-align:center;padding-top:0}
-  .lp-node .yr{font-size:.78rem;color:var(--ink);font-weight:600;letter-spacing:.05em}
-  .lp-node .dot{width:14px;height:14px;border-radius:50%;margin:.9rem auto;border:3px solid var(--navy);position:relative;z-index:1}
-  .lp-node .val{font-weight:800;font-size:clamp(1.1rem,3vw,1.7rem);letter-spacing:-.02em}
-  .lp-node .tag{font-size:.66rem;color:var(--ink);font-weight:300;margin-top:.25rem}
-  .lp-node.future .val{opacity:.85}
-  .lp-note{margin-top:1.4rem;font-size:.74rem;color:var(--ink);font-weight:300;line-height:1.5;max-width:60ch;margin-left:auto;margin-right:auto}
+  .lp-node .yr{font-size:1rem;color:var(--ink);font-weight:600;letter-spacing:.05em}
+  .lp-node .dot{width:20px;height:20px;border-radius:50%;margin:1.1rem auto;border:3px solid var(--navy);position:relative;z-index:1}
+  .lp-node .val{font-weight:800;font-size:clamp(1.5rem,4vw,2.4rem);letter-spacing:-.02em}
+  .lp-node .tag{font-size:.85rem;color:var(--ink);font-weight:300;margin-top:.25rem}
+  .lp-note{margin-top:1.4rem;font-size:.92rem;color:var(--ink);font-weight:300;line-height:1.5;max-width:60ch;margin-left:auto;margin-right:auto}
 
   /* ---- Akt I: Ereignis-Marker & Warming Stripes ---- */
   .evt-dot{fill:var(--ink);stroke:var(--navy);stroke-width:2;cursor:pointer;transition:r .15s}
@@ -202,7 +201,7 @@
   transform: translateY(-3px);
 }
 
-@media (max-width: 600px) {
+@media(max-width:600px){.lp-track:before{top:38px}}
   .back-to-top {
     right: 1rem;
     bottom: 1rem;
