@@ -373,3 +373,112 @@
     transform: none;
   }
 }
+/* ============================================================
+   Zukunft: SSP-Legende mit Tooltip
+   ============================================================ */
+
+.fan-legend-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.fan-legend {
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.fan-info-wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.fan-info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.fan-info-btn:hover,
+.fan-info-btn:focus {
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+.fan-info-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 14px);
+  right: 0;
+  width: 340px;
+  background: rgba(14, 41, 64, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 14px 16px;
+  z-index: 250;
+  pointer-events: none;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.fan-info-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 8px;
+  border: 7px solid transparent;
+  border-top-color: rgba(14, 41, 64, 0.96);
+}
+
+.fan-info-btn:hover .fan-info-tooltip,
+.fan-info-btn:focus .fan-info-tooltip {
+  display: block;
+}
+
+.tooltip-badge.ssp-blue {
+  background: rgba(73, 135, 193, 0.2);
+  color: var(--blau);
+}
+
+.tooltip-badge.ssp-orange {
+  background: rgba(232, 154, 60, 0.2);
+  color: var(--orange);
+}
+
+.tooltip-badge.ssp-red {
+  background: rgba(245, 0, 46, 0.18);
+  color: var(--rot);
+}
+
+@media (max-width: 720px) {
+  .fan-legend-wrap {
+    align-items: flex-start;
+  }
+
+  .fan-info-tooltip {
+    right: 0;
+    width: min(320px, 82vw);
+  }
+}
