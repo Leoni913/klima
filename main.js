@@ -188,7 +188,7 @@ const AKT1_EVENTS = AKT1_EVENT_YEARS
       svg.append("circle").attr("cx",x(LAST)).attr("cy",y(byYear.get(LAST))).attr("r",4).attr("fill","var(--rot)").attr("opacity",0).transition().delay(2200).duration(400).attr("opacity",1);
       svg.append("text").attr("x",x(LAST)).attr("y",y(byYear.get(LAST))-12).attr("text-anchor","end").attr("fill","var(--ink)").attr("font-size",13).attr("font-weight",600).text(LAST+": "+de(byYear.get(LAST))+" \u00B0C").attr("opacity",0).transition().delay(2200).duration(400).attr("opacity",1);
       svg.append("rect").attr("x",m.l).attr("y",m.t).attr("width",W-m.l-m.r).attr("height",H-m.t-m.b).attr("fill","transparent").on("mousemove",function(ev){const yr=Math.round(x.invert(d3.pointer(ev,svg.node())[0]));if(!byYear.has(yr))return;tip.innerHTML="<b>"+yr+"</b> &nbsp; "+de(byYear.get(yr))+" \u00B0C";tip.style.left=(ev.clientX+14)+"px";tip.style.top=(ev.clientY-10)+"px";tip.style.opacity=1;}).on("mouseleave",()=>tip.style.opacity=0);
-      /* Ereignis-Marker: 10 Punkte aus klimaereignisse.json */
+    /* Ereignis-Marker: 10 Punkte aus klimaereignisse.json */
 const EVENTS = AKT1_EVENTS;
 const eg = svg.append("g");
 
