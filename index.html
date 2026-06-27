@@ -145,7 +145,55 @@
       <label for="countrySelect">Land</label>
       <select id="countrySelect"></select>
     </div>
-    <div class="fan-legend" id="fanLegend"></div>
+<div class="fan-legend-wrap">
+  <div class="fan-legend" id="fanLegend"></div>
+
+  <div class="fan-info-wrap">
+    <button class="fan-info-btn" aria-label="Szenarien erklären" tabindex="0">
+      i
+      <span class="fan-info-tooltip" role="tooltip">
+        <span class="tooltip-kopf">Szenarien erklärt</span>
+
+        <span class="tooltip-zeile">
+          <span class="tooltip-badge ssp-blue">SSP2-4.5</span>
+          <span class="tooltip-text">
+            <strong>Klimaschutz</strong> — ein mittlerer gesellschaftlicher Entwicklungspfad
+            mit spürbaren Klimaschutzmaßnahmen. Die Erwärmung wird gebremst,
+            aber nicht vollständig gestoppt.
+          </span>
+        </span>
+
+        <span class="tooltip-trennlinie"></span>
+
+        <span class="tooltip-zeile">
+          <span class="tooltip-badge ssp-orange">SSP3-7.0</span>
+          <span class="tooltip-text">
+            <strong>Mittlerer Pfad</strong> — schwächerer internationaler Klimaschutz,
+            mehr regionale Konflikte und höhere Emissionen. Die Temperaturen steigen
+            deutlich stärker.
+          </span>
+        </span>
+
+        <span class="tooltip-trennlinie"></span>
+
+        <span class="tooltip-zeile">
+          <span class="tooltip-badge ssp-red">SSP5-8.5</span>
+          <span class="tooltip-text">
+            <strong>Hohe Emissionen</strong> — sehr fossiles, emissionsintensives Szenario
+            mit wenig wirksamem Klimaschutz. Das ist der Pfad mit der stärksten Erwärmung.
+          </span>
+        </span>
+
+        <span class="tooltip-trennlinie"></span>
+
+        <span class="tooltip-fuss">
+          SSP = Shared Socioeconomic Pathway<br>
+          Die Zahl dahinter beschreibt näherungsweise den Strahlungsantrieb bis 2100.
+        </span>
+      </span>
+    </button>
+  </div>
+</div>
     <svg id="chart-fan" viewBox="0 0 1100 500"></svg>
     <p id="fanSentence"></p>
   </div>
