@@ -217,3 +217,159 @@
     font-size: 1.4rem;
   }
 }
+/* ============================================================
+   Einheiten-Legende mit Tooltip
+   Platzierung: neben Gesamt / Pro-Kopf-Umschalter
+   ============================================================ */
+
+.toggle-with-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.legende-wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.info-btn:hover,
+.info-btn:focus {
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+.info-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 310px;
+  background: rgba(14, 41, 64, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 14px 16px;
+  z-index: 200;
+  pointer-events: none;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.info-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: rgba(14, 41, 64, 0.96);
+}
+
+.info-btn:hover .info-tooltip,
+.info-btn:focus .info-tooltip {
+  display: block;
+}
+
+.tooltip-kopf {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+}
+
+.tooltip-zeile {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.tooltip-badge {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.tooltip-badge.gesamt {
+  background: rgba(73, 135, 193, 0.2);
+  color: var(--blau);
+}
+
+.tooltip-badge.prokopf {
+  background: rgba(245, 0, 46, 0.18);
+  color: var(--rot);
+}
+
+.tooltip-text {
+  font-size: 13px;
+  color: #c2d2e2;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.tooltip-text strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.tooltip-trennlinie {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 11px 0;
+}
+
+.tooltip-fuss {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+@media (max-width: 720px) {
+  .toggle-with-info {
+    width: 100%;
+  }
+
+  .info-tooltip {
+    left: auto;
+    right: -8px;
+    transform: none;
+    width: min(300px, 82vw);
+  }
+
+  .info-tooltip::after {
+    left: auto;
+    right: 10px;
+    transform: none;
+  }
+}
