@@ -60,16 +60,14 @@ async function boot() {
     const NAMES = countryNames;
     const POP = population2023;
     const PROJ = projectionData;
-    const CLIMATE_EVENTS = klimaereignisse
-  .filter(d => d.jahr != null && d.titel && d.beschreibung)
+const CLIMATE_EVENTS = klimaereignisse
   .map(d => ({
     year: +d.jahr,
-    title: d.titel,
-    description: d.beschreibung,
+    title: d.titel || "",
+    description: d.beschreibung || "",
     category: d.kategorie || ""
   }))
-  .filter(d => d.year >= FIRST && d.year <= LAST && byYear.has(d.year))
-  .sort((a, b) => a.year - b.year);
+  .filter(d => !isNaN(d.year));
 
 /* 10 bewusst ausgewählte, gut verteilte Ereignisse für Akt I */
 const AKT1_EVENT_YEARS = [
