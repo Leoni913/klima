@@ -27,7 +27,8 @@ async function boot() {
       num2isoMap,
       countryNames,
       population2023,
-      projectionData
+      projectionData,
+      klimaereignisse
     ] = await Promise.all([
       loadJSON("gistemp_annual.json"),
       loadJSON("ghg_emissions.json"),
@@ -35,7 +36,8 @@ async function boot() {
       loadJSON("num2iso.json"),
       loadJSON("country_names.json"),
       loadJSON("population_2023_million.json"),
-      loadJSON("projections_temperature_compact.json")
+      loadJSON("projections_temperature_compact.json"),
+      loadJSON("klimaereignisse.json")
     ]);
 
     const TEMP = gistempAnnual
@@ -58,6 +60,34 @@ async function boot() {
     const NAMES = countryNames;
     const POP = population2023;
     const PROJ = projectionData;
+    const CLIMATE_EVENTS = klimaereignisse
+  .filter(d => d.jahr != null && d.titel && d.beschreibung)
+  .map(d => ({
+    year: +d.jahr,
+    title: d.titel,
+    description: d.beschreibung,
+    category: d.kategorie || ""
+  }))
+  .filter(d => d.year >= FIRST && d.year <= LAST && byYear.has(d.year))
+  .sort((a, b) => a.year - b.year);
+
+/* 10 bewusst ausgewählte, gut verteilte Ereignisse für Akt I */
+const AKT1_EVENT_YEARS = [
+  1896, // Arrhenius
+  1938, // Callendar
+  1960, // Keeling-Kurve
+  1970, // Earth Day / NOAA
+  1988, // IPCC
+  1997, // Kyoto
+  2003, // Hitzewelle Europa
+  2015, // Paris
+  2021, // AR6 / Glasgow
+  2024  // wärmstes Jahr
+];
+
+const AKT1_EVENTS = AKT1_EVENT_YEARS
+  .map(year => CLIMATE_EVENTS.find(d => d.year === year))
+  .filter(Boolean);
 
     // Bereinigte Ländernamen: blendet technische/ungeklärte Kürzel wie CYN, ATC usw. aus.
     function cleanCountryName(iso) {
@@ -158,14 +188,77 @@ async function boot() {
       svg.append("circle").attr("cx",x(LAST)).attr("cy",y(byYear.get(LAST))).attr("r",4).attr("fill","var(--rot)").attr("opacity",0).transition().delay(2200).duration(400).attr("opacity",1);
       svg.append("text").attr("x",x(LAST)).attr("y",y(byYear.get(LAST))-12).attr("text-anchor","end").attr("fill","var(--ink)").attr("font-size",13).attr("font-weight",600).text(LAST+": "+de(byYear.get(LAST))+" \u00B0C").attr("opacity",0).transition().delay(2200).duration(400).attr("opacity",1);
       svg.append("rect").attr("x",m.l).attr("y",m.t).attr("width",W-m.l-m.r).attr("height",H-m.t-m.b).attr("fill","transparent").on("mousemove",function(ev){const yr=Math.round(x.invert(d3.pointer(ev,svg.node())[0]));if(!byYear.has(yr))return;tip.innerHTML="<b>"+yr+"</b> &nbsp; "+de(byYear.get(yr))+" \u00B0C";tip.style.left=(ev.clientX+14)+"px";tip.style.top=(ev.clientY-10)+"px";tip.style.opacity=1;}).on("mouseleave",()=>tip.style.opacity=0);
-      /* Ereignis-Marker */
-      const EVENTS=[
-        [1958,"Mauna-Loa-Messreihe","Charles Keeling beginnt, die CO\u2082-Konzentration kontinuierlich zu messen \u2014 die ber\u00FChmte \u201EKeeling-Kurve\u201C entsteht."],
-        [1988,"Gr\u00FCndung des IPCC","Die Vereinten Nationen rufen den Weltklimarat ins Leben, um den Forschungsstand zur Erderw\u00E4rmung zu b\u00FCndeln."],
-        [1997,"Kyoto-Protokoll","Erstmals verpflichten sich Industriestaaten v\u00F6lkerrechtlich zur Reduktion ihrer Treibhausgase."],
-        [2015,"Pariser Klimaabkommen","195 Staaten beschlie\u00DFen, die Erw\u00E4rmung deutlich unter 2&nbsp;\u00B0C \u2014 m\u00F6glichst auf 1,5&nbsp;\u00B0C \u2014 zu begrenzen."],
-        [2024,"W\u00E4rmstes Jahr","2024 wird das hei\u00DFeste je gemessene Jahr und durchbricht erstmals die 1,5-\u00B0C-Marke gegen\u00FCber vorindustrieller Zeit."]
-      ];
+      /* Ereignis-Marker: 10 Punkte aus klimaereignisse.json */
+const EVENTS = AKT1_EVENTS;
+const eg = svg.append("g");
+
+EVENTS.forEach((e, i) => {
+  const yr = e.year;
+  if (!byYear.has(yr)) return;
+
+  const px = x(yr);
+  const py = y(byYear.get(yr));
+
+  const placeAbove = i % 2 === 0;
+  const labelY = placeAbove ? py - 16 : py + 28;
+  const lineY2 = placeAbove ? H - m.b : py + 18;
+
+  eg.append("line")
+    .attr("class", "evt-line")
+    .attr("x1", px)
+    .attr("x2", px)
+    .attr("y1", py)
+    .attr("y2", H - m.b)
+    .attr("opacity", 0)
+    .transition()
+    .delay(2200 + i * 70)
+    .duration(500)
+    .attr("opacity", 1);
+
+  eg.append("text")
+    .attr("class", "evt-label")
+    .attr("x", px)
+    .attr("y", labelY)
+    .attr("text-anchor", "middle")
+    .text(yr)
+    .attr("opacity", 0)
+    .transition()
+    .delay(2400 + i * 70)
+    .duration(450)
+    .attr("opacity", 1);
+
+  eg.append("circle")
+    .attr("class", "evt-dot")
+    .attr("cx", px)
+    .attr("cy", py)
+    .attr("r", 0)
+    .on("mouseenter", function (ev) {
+      d3.select(this).attr("r", 7);
+
+      const cat = e.category
+        ? `<div style="margin-top:4px;color:var(--blau);font-size:11px;font-weight:600;">${e.category}</div>`
+        : "";
+
+      tip.innerHTML =
+        `<b style="color:var(--ink)">${yr} · ${e.title}</b>` +
+        cat +
+        `<span style="display:block;max-width:270px;margin-top:6px;color:#c2d2e2;font-weight:300;line-height:1.45;">${e.description}</span>`;
+
+      tip.style.opacity = 1;
+    })
+    .on("mousemove", function (ev) {
+      tip.style.left = (ev.clientX + 14) + "px";
+      tip.style.top = (ev.clientY - 10) + "px";
+    })
+    .on("mouseleave", function () {
+      d3.select(this).attr("r", 5);
+      tip.style.opacity = 0;
+    })
+    .transition()
+    .delay(2400 + i * 70)
+    .duration(500)
+    .attr("r", 5);
+});
       const eg=svg.append("g");
       EVENTS.forEach(e=>{const yr=e[0];if(!byYear.has(yr))return;const px=x(yr),py=y(byYear.get(yr));
         eg.append("line").attr("class","evt-line").attr("x1",px).attr("x2",px).attr("y1",py).attr("y2",H-m.b);
